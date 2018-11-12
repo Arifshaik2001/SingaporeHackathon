@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<style type="text/css">
+	.incidentsList{
+		float: right;
+		top:0px;
+		right:0px;
+		height: 90vh;
+		width: 20vw;
+		border: 1px solid red;
+	}
+	.googleMap{
+		float: left;
+		top:0px;
+		left:0px;
+		height: 90vh;
+		width: 70vw;
+		border: 2px solid black;
+	}
+</style>
+
+<body>
+	
+	<script type="text/javascript" src="incidents.js"></script>
+
+	<script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+	<script type="text/javascript">
+		var config = {
+			apiKey: "AIzaSyAcmA0uoQePRAGDRL597B63t-G_rjBPsBY",
+			authDomain: "locationtracking-f9aa2.firebaseapp.com",
+			databaseURL: "https://locationtracking-f9aa2.firebaseio.com",
+			projectId: "locationtracking-f9aa2",
+			storageBucket: "locationtracking-f9aa2.appspot.com",
+			messagingSenderId: "438301280498"
+		};
+		firebase.initializeApp(config);
+		var markers=[];
+		
+		function myMap() {
+			var mapProp= {
+				center:new google.maps.LatLng(17.5910123,78.121290),
+				zoom:15,
+			};
+			var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+				
+			mapIncidents(map,firebase, markers);
+		}
+	</script>
+
+	<div class="incidentsList" id="incidentsList">
+		
+	</div>
+
+	<div class="googleMap" id="googleMap">
+
+	</div>
+
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnXbxDRApaOcIEXNokvkO0GkGGJcRAcqQ&callback=myMap"></script>
+</body>
+</html>
