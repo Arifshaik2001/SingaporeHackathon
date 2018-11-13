@@ -22,7 +22,7 @@ function mapIncidents(map, firebase, markers){
 		var keys = Object.keys(incidents);
 
 		var inclist = document.getElementById("incidentsList");
-		var str = "<div>";
+		var str = "<div> <p> <ul> ";
 
 		for(var i = keys.length-1; i>=0; i--) {
 			var k = keys[i];
@@ -39,13 +39,13 @@ function mapIncidents(map, firebase, markers){
 			markers.push(marker);
 
 			var incidentType = incidents[k].incidentType;
-			str += "<input type=\"radio\" name=\"incident\" id=\"" + incidentId + "\" onclick=\"selmar(this,markers)\"/> Type: "+ incidentType + ", Lat: "+ lat+ ", Lon: " + lon + "<br>";
+			str += "<input type=\"radio\" name=\"incident\" id=\"" + incidentId + "\" onclick=\"selmar(this,markers)\"/> Type: "+ incidentType + "<br><pre><center> Lat: "+ lat+ "</center></pre><br><pre><center>Lon: " + lon + "</center></pre><br><br>";
 
 			google.maps.event.addListener(marker, 'click', function(){
 				$("#"+this.markerId).prop('checked',true);
 			})
 		}
-		str += "</div>"
+		str += "</ul></p></div>"
 		inclist.innerHTML = str;
 	}
 }
