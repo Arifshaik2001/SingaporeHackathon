@@ -18,10 +18,26 @@ function mapIncidents(map, firebase, markers){
 
 	function getIncidents(data){
 		// get all incidents.
+		console.log("hi");
+		var inclist = document.getElementById("incidentsList");
+
+		if(data.val()==null){
+			for(var i=0; i<markers.length; i++){
+				markers[i].setMap(null);
+			}
+			markers=[];
+			inclist.innerHTML = "<p>No Incidents!</p>";
+			return;
+		}
 		var incidents = data.val();
 		var keys = Object.keys(incidents);
 
-		var inclist = document.getElementById("incidentsList");
+		for(var i=0; i<markers.length; i++){
+			markers[i].setMap(null);
+		}
+		markers = [];
+
+		
 		var str = "<div> <p> <ul> ";
 
 		for(var i = keys.length-1; i>=0; i--) {
@@ -45,7 +61,7 @@ function mapIncidents(map, firebase, markers){
 				$("#"+this.markerId).prop('checked',true);
 			})
 		}
-		str += "</ul></p></div>"
+		str += "</ul></p></div>";
 		inclist.innerHTML = str;
 	}
 }
